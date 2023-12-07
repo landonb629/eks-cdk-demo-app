@@ -1,0 +1,31 @@
+version: '3'
+services:
+  auth:
+    build: ./services/auth
+    volumes:
+      - type: bind
+        source: ./services/auth
+        target: /app/
+    ports: 
+      - 3001:3001
+    networks:
+      - eks-test-network
+  tasks:
+    build: ./services/tasks
+    volumes:
+      - type: bind
+        source: ./services/tasks
+        target: /app/
+    ports:
+      - 3002:3002
+    networks:
+      - eks-test-network
+  goals:
+    build: ./services/goals
+    ports: 
+      - 3003:3003
+    networks:
+      - eks-test-network
+    
+networks:
+  eks-test-network:

@@ -4,10 +4,10 @@ const app = express()
 const cors = require('cors')
 
 
-app.use(cors())
+app.use(cors({origin: true}));
 app.get('/', async (req,res) => { 
   console.log('hit auth service')
-  res.send({msg: 'response from auth service'})
+  res.status(200).json({msg: 'OK'})
 })
 
 app.listen(3001, ()=> { 

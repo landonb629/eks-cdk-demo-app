@@ -1,10 +1,12 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 
+app.use(cors({origin: true}))
 app.get('/', async (req,res) => { 
-  res.send({msg: 'response from task service'})
+  res.status(200).json({msg: 'OK'})
 })
 
-app.listen(3001, ()=> { 
-  console.log('application running on port 3001')
+app.listen(3002, ()=> { 
+  console.log('application running on port 3002')
 })

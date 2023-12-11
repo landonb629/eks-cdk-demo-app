@@ -8,20 +8,43 @@ function App() {
   const [goal, setGoals] = useState('')
 
   useEffect(() => { 
-    const getAuth = async () => { 
-      try { 
-        const request = await axios.get('http://localhost:3001')
-        console.log(request)
-      } catch(error) { 
-        console.log(error)
-      }
+    const getServiceHealth = async () => { 
+        const svc = {
+          auth: 'http://localhost:3001/',
+          task: 'http://localhost:3002/',
+          goal: 'http://localhost:3003/'
+        }
+        const services = Object.keys(svc)
+        services.map(async (service) => { 
+          try {
+            let request = await axios.get(`${svc[service]}`)
+            if (service == 'auth') { 
+              setAuth(request.data.msg)
+            } else if (service == 'task') { 
+              setTask(request.data.msg) 
+            } else {
+              setGoals(request.data.msg)
+            }
+          } catch(error) { 
+            console.log(error)
+          }
+        })
     }
-    getAuth()
+    getServiceHealth()
   },[])
 
   return (
     <>
-    <div>react app</div>
+    <div>
+      <h1>react microservice example</h1>
+      <div>
+        <ul>
+          <li>auth service: {auth}</li>
+          <li>task service: {task}</li>
+          <li>goal service: {goal}</li>
+        </ul>
+      </div>
+    </div>
      </>
   )
 }

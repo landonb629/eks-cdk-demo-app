@@ -5,7 +5,7 @@ services:
     volumes:
       - type: bind
         source: ./services/auth
-        target: /app/
+        target: /usr/src/app/
     ports: 
       - 3001:3001
     networks:
@@ -15,7 +15,7 @@ services:
     volumes:
       - type: bind
         source: ./services/tasks
-        target: /app/
+        target: /usr/src/app/
     ports:
       - 3002:3002
     networks:
@@ -24,6 +24,10 @@ services:
     build: ./services/goals
     ports: 
       - 3003:3003
+    volumes:
+      - type: bind
+        source: ./services/goals
+        target: /usr/src/app/
     networks:
       - eks-test-network
     

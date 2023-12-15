@@ -27,7 +27,7 @@ services:
     volumes:
       - type: bind
         source: ./services/goals
-        target: /usr/src/app/
+        target: /usr/src/app/ 
     networks:
       - eks-test-network
     
